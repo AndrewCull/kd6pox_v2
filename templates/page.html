@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <article>
+    <header>
+      <h1>{{ page.title }}</h1>
+      {% if page.date %}
+        <p class="meta">
+          {% if page.updated_at %}
+            <time datetime="{{ page.updated_at | date(format="%+") }}">
+              {{ page.updated_at | date(format="%Y-%m-%d") }}
+            </time>
+            &nbsp;(original:
+            <time datetime="{{ page.date | date(format="%+") }}">
+              {{ page.date | date(format="%Y-%m-%d") }}
+            </time>)
+          {% else %}
+            <time datetime="{{ page.date | date(format="%+") }}">
+              {{ page.date | date(format="%Y-%m-%d") }}
+            </time>
+          {% endif %}{% if config.extra.author_name %} — {{ config.extra.author_name }}{% endif %}
+        </p>
+      {% endif %}
+    </header>
+
+    {{ page.content | safe }}
+  </article>
+{% endblock content %}

@@ -1,0 +1,17 @@
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Build artifacts
+public/
+public.zip
+*.log
+
+# Dependency caches
+node_modules/
+.cache/
+.sass-cache/

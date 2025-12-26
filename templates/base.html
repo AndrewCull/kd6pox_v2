@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+            {% if page and page.title %}{{ page.title }} · {% endif %} {% if
+            section and section.title %}{{ section.title }} · {% endif %} {{
+            config.title }}
+        </title>
+        <link rel="stylesheet" href="{{ get_url(path='site.css') }}" />
+        {% if config.generate_feeds %}
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="{{ config.title }}"
+            href="{{ get_url(path='feed.xml') }}"
+        />
+        {% endif %} {% if config.extra.ga_tag_id %}
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.ga_tag_id }}"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "{{ config.extra.ga_tag_id }}");
+        </script>
+        {% endif %}
+    </head>
+
+    <body>
+        <div class="page">
+            <main class="wrap">
+                <!--<header class="site-header">
+                    <h1 class="site-title">
+                        <a href="{{ config.base_url | safe }}"
+                            >{{ config.title }}</a
+                        >
+                    </h1>
+
+
+                    <p class="site-links">
+                        {% for l in config.extra.links %}
+                        <a href="{{ l.url }}">{{ l.name }}</a>{% if not
+                        loop.last %} · {% endif %} {% endfor %} {% if
+                        config.extra.linkedin %} ·
+                        <a href="{{ config.extra.linkedin }}">LinkedIn</a> {%
+                        endif %} {% if config.extra.instagram %} ·
+                        <a href="{{ config.extra.instagram }}">Instagram</a>
+                        {% endif %}
+                    </p>
+                </header>-->
+
+                {% block content %}{% endblock content %}
+            </main>
+
+            <footer class="wrap site-footer">
+                <nav class="post-nav footer-row" aria-label="Footer">
+                    <div class="footer-left">
+                        {% if config.extra.footer_msg %}{{
+                        config.extra.footer_msg }}{% endif %}
+                    </div>
+
+                    <div class="footer-center" aria-hidden="false">
+                        <div class="footer-links">
+                            {% for l in config.extra.links %}
+                            <a href="{{ l.url }}">{{ l.name }}</a>{% if not
+                            loop.last %} · {% endif %} {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="footer-right">
+                        &copy; {{ now() | date(format="%Y") }} {{
+                        config.extra.author_name }}
+                    </div>
+                </nav>
+            </footer>
+        </div>
+    </body>
+</html>

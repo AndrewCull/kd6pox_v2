@@ -1,0 +1,328 @@
+body {
+    line-height: 1.4;
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 0; /* reset outer margin for sticky footer layout */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content wrapper for text */
+#maincontent {
+    max-width: 42em;
+    margin: 15px auto;
+}
+
+/* Also support the .wrap class used in templates */
+.wrap {
+    max-width: 52em;
+    margin: 0 auto;
+    padding: 1.25rem 1rem; /* extra internal spacing for content */
+    box-sizing: border-box;
+}
+
+/* Make the page a column flex container so the footer can stick to the bottom.
+   The main content area (the <main class="wrap"> element) should expand to
+   fill available vertical space, pushing the footer to the bottom when content
+   is short. */
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* Ensure the main content (first .wrap inside .page) grows to fill space */
+main.wrap {
+    flex: 1 0 auto;
+}
+
+/* Make individual posts layout as column flex containers so parts below
+   the share-links can be pushed to the bottom for improved readability. */
+.post-article {
+    display: flex;
+    flex-direction: column;
+    /* allow the article to take available vertical space; adjust if you want taller posts */
+    min-height: 60vh;
+}
+
+/* The top portion (title, content, share-links) should flow naturally */
+.post-article .post-top {
+    flex: 0 0 auto;
+}
+
+/* The bottom block (hr, navigation, etc.) should be pushed to the end of the article */
+.post-article .post-bottom {
+    margin-top: auto;
+}
+
+/* Default images (constrained to container width) */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+/* Figure with caption styling produced by the image render hook.
+   The caption uses the image alt/text (or title) in italic. */
+.image-figure {
+    margin: 1.25rem 0;
+    text-align: center;
+}
+
+.image-figure img {
+    display: block;
+    margin: 0 auto 0.5rem auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-caption {
+    font-size: 0.94rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Allow media (images, video, figure) inside the main content to break out
+   wider than the text flow. They will be up to 52em, centered, and constrained
+   by the viewport width when necessary. */
+.wrap img,
+.wrap video,
+.wrap figure {
+    /* allow a wider maximum for media while ensuring they never exceed their container */
+    max-width: min(52em, 100%);
+    /* make media responsive: fill available width of the wrap but never overflow viewport */
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* center media within the wrap */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* If the viewport is narrower than the breakout amount, ensure media are fully responsive */
+@media (max-width: 52em) {
+    .wrap img,
+    .wrap video,
+    .wrap figure {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+}
+
+/* Post navigation: space previous and next links to opposite sides */
+.post-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    padding: 0.25rem 0;
+}
+
+/* Ensure links look consistent */
+.post-nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Simple share links styling */
+.share-links {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    color: inherit;
+    line-height: 1.3;
+}
+.share-links a {
+    color: inherit;
+    text-decoration: none;
+    margin-right: 0.6rem;
+}
+.share-links a:hover {
+    text-decoration: underline;
+}
+
+/* If only one link is present, keep it aligned to the left */
+.post-nav:only-child,
+.post-nav:empty {
+    justify-content: flex-start;
+}
+
+/* Footer layout: single row on desktop, centered stack on mobile */
+.footer-row,
+.site-footer .post-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0.75rem 0;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+}
+
+/* Left column */
+.footer-left,
+.site-footer .post-nav .footer-left {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* Center column */
+.footer-center,
+.site-footer .post-nav .footer-center {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure centered links don't wrap awkwardly on wide screens */
+.footer-center .footer-links,
+.site-footer .post-nav .footer-center .footer-links {
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+/* Right column */
+.footer-right,
+.site-footer .post-nav .footer-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: #6b6b6b;
+}
+
+/* Mobile: stack footer elements and center them */
+@media (max-width: 48em) {
+    .footer-row,
+    .site-footer .post-nav {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right,
+    .site-footer .post-nav .footer-left,
+    .site-footer .post-nav .footer-center,
+    .site-footer .post-nav .footer-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-right,
+    .site-footer .post-nav .footer-right {
+        white-space: normal;
+    }
+
+    /* Allow the center links to wrap on very small screens */
+    .footer-center .footer-links,
+    .site-footer .post-nav .footer-center .footer-links {
+        white-space: normal;
+    }
+}
+
+/* Archive layout: left-align year headings and lists */
+.archive-year {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.archive-year-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.archive-year-list li {
+    margin: 0.9rem 0;
+}
+
+/* Small, muted copyright line at the very bottom */
+.site-copyright {
+    font-size: 0.9rem;
+    color: #6b6b6b;
+    text-align: center;
+    margin-top: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Dark mode: follow user's OS/browser preference */
+@media (prefers-color-scheme: dark) {
+    /* Page background and default text color */
+    body {
+        background-color: #121212;
+        color: #fafafa;
+    }
+
+    /* Links: a slightly muted blue for contrast */
+    a {
+        color: #90caf9;
+    }
+    a:hover,
+    a:focus {
+        color: #bbdefb;
+        text-decoration: underline;
+    }
+
+    /* Keep footer readable but subtle */
+    .site-footer,
+    .site-note,
+    .footer-msg,
+    .footer-links {
+        color: #d0d0d0;
+    }
+
+    .site-footer {
+        background: transparent;
+    }
+
+    /* Post nav links */
+    .post-nav a {
+        color: #fafafa;
+    }
+
+    /* Archive year headings */
+    .archive-year {
+        color: #ffffff;
+    }
+
+    /* Muted copyright in dark mode */
+    .site-copyright {
+        color: #999999;
+    }
+
+    /* HR or subtle separators */
+    hr {
+        border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Ensure media (images/video) don't get unwanted backgrounds */
+    .wrap img,
+    .wrap video,
+    .wrap figure {
+        background: transparent;
+    }
+}

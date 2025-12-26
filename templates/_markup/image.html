@@ -1,0 +1,18 @@
+<figure class="image-figure">
+    <img
+        src="{{ src | safe }}"
+        alt="{{ alt | safe }}"
+        {%
+        if
+        title
+        %}title="{{ title | safe }}"
+        {%
+        endif
+        %}
+    />
+    {% if title %}
+    <figcaption class="image-caption"><em>{{ title | safe }}</em></figcaption>
+    {% elif alt %}
+    <figcaption class="image-caption"><em>{{ alt | safe }}</em></figcaption>
+    {% endif %}
+</figure>

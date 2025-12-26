@@ -1,0 +1,37 @@
+# The URL the site will be built for
+base_url = "https://www.kd6pox.com"
+title = "Andrew Cull"
+description = "I’ve built and led companies and organizations for more than 25 years in high-complexity, mission-critical environments where errors carry real consequences. Today, I help people navigate complexity using strategy and systems engineering grounded in first-principles thinking. I’m interested in how incentives, psychology, and structure shape behavior, how systems fail quietly over time, and how to reduce cognitive overhead for people doing real work. Outside of work, I spend time flying airplanes, doing hard things, and traveling in places where preparation and judgment matter. I write here to think clearly, test ideas, document, and share what I’ve learned."
+
+
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_limit = 20
+
+[markdown]
+highlight_code = true
+smart_punctuation = false
+
+[extra]
+# Identity block (top of every page)
+author_name = "Andrew Cull"
+# Simple nav links (no top nav bar; rendered as inline links in the header)
+links = [
+{ name = "home", url="/"},
+{ name = "archive", url = "/archive/" },
+{ name = "about",   url = "/about/"   },
+{ name = "focus",     url = "/focus/"     },
+{ name = "connect", url = "/about#connect"}
+
+]
+
+footer_msg = "Working notes and essays."
+
+# Socials (optional)
+linkedin  = "https://www.linkedin.com/in/andrewdcull/"
+instagram = "https://www.instagram.com/kd6pox/"
+github = "https://www.githube.com/AndrewCull"
+
+# Analytics
+ga_tag_id ="G-KPG8PX4VKS"
