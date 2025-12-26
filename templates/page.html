@@ -29,21 +29,23 @@
     {% set instagram = config.extra.instagram | default(value="") %}
     {% set github = config.extra.github | default(value="") %}
 
-    {% if page.slug == "about" and ([linkedin, instagram, github] | join(sep="")) != "" %}
-      <section class="about-social">
-        <h2>Connect</h2>
-        <ul class="about-social-list">
-          {% if linkedin %}
-          <li><a href="{{ linkedin }}">LinkedIn</a></li>
-          {% endif %}
-          {% if instagram %}
-          <li><a href="{{ instagram }}">Instagram</a></li>
-          {% endif %}
-          {% if github %}
-          <li><a href="{{ github }}">Github</a></li>
-          {% endif %}
-        </ul>
-      </section>
+    {% if page.slug == "about" %}
+      {% if linkedin | length > 0 or instagram | length > 0 or github | length > 0 %}
+        <section class="about-social">
+          <h2>Connect</h2>
+          <ul class="about-social-list">
+            {% if linkedin | length > 0 %}
+            <li><a href="{{ linkedin }}">LinkedIn</a></li>
+            {% endif %}
+            {% if instagram | length > 0 %}
+            <li><a href="{{ instagram }}">Instagram</a></li>
+            {% endif %}
+            {% if github | length > 0 %}
+            <li><a href="{{ github }}">Github</a></li>
+            {% endif %}
+          </ul>
+        </section>
+      {% endif %}
     {% endif %}
   </article>
 {% endblock content %}
