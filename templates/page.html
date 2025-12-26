@@ -25,18 +25,22 @@
 
     {{ page.content | safe }}
 
-    {% if page.slug == "about" and (config.extra.linkedin or config.extra.instagram or config.extra.github) %}
+    {% set linkedin = config.extra.linkedin | default(value="") %}
+    {% set instagram = config.extra.instagram | default(value="") %}
+    {% set github = config.extra.github | default(value="") %}
+
+    {% if page.slug == "about" and ([linkedin, instagram, github] | join(sep="")) != "" %}
       <section class="about-social">
         <h2>Connect</h2>
         <ul class="about-social-list">
-          {% if config.extra.linkedin %}
-          <li><a href="{{ config.extra.linkedin }}">LinkedIn</a></li>
+          {% if linkedin %}
+          <li><a href="{{ linkedin }}">LinkedIn</a></li>
           {% endif %}
-          {% if config.extra.instagram %}
-          <li><a href="{{ config.extra.instagram }}">Instagram</a></li>
+          {% if instagram %}
+          <li><a href="{{ instagram }}">Instagram</a></li>
           {% endif %}
-          {% if config.extra.github %}
-          <li><a href="{{ config.extra.github }}">Github</a></li>
+          {% if github %}
+          <li><a href="{{ github }}">Github</a></li>
           {% endif %}
         </ul>
       </section>
