@@ -7,7 +7,11 @@ description = "I’ve built and led companies and organizations for more than 25
 compile_sass = false
 build_search_index = false
 generate_feeds = true
+generate_sitemap = true
+generate_robots_txt = true
 feed_limit = 20
+
+
 
 [markdown]
 highlight_code = true
