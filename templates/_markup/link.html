@@ -1,0 +1,15 @@
+{# Render hook for Markdown links with external link notation #} {% set
+href_value = href | default(value="") %} {% set link_body = body |
+default(value=text) | default(value=href_value) %} {% set title_attr = title |
+default(value="") %} {% set base_url = config.base_url | default(value="") %} {%
+set is_http = href_value is starting_with("http://") or href_value is
+starting_with("https://") %} {% set is_internal = false %} {% if is_http and
+base_url != "" and href_value is starting_with(base_url) %} {% set is_internal =
+true %} {% endif %} {% set is_external = is_http and not is_internal %}
+
+<a href="{{ href_value }}" {% if title_attr | length>
+    0 %}title="{{ title_attr }}"{% endif %} {% if is_external %}target="_blank"
+    rel="noopener noreferrer"{% endif %} > {{ link_body | safe }}{% if
+    is_external %} <span class="external-link-note"> (external)</span>{% endif
+    %}
+</a>
