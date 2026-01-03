@@ -1,5 +1,6 @@
 +++
 title = "Now"
+description = "Snapshot of current projects, learning, and training priorities."
 +++
 
 A short snapshot of what I’m focused on right now.

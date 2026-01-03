@@ -23,11 +23,10 @@ author_name = "Andrew Cull"
 # Simple nav links (no top nav bar; rendered as inline links in the header)
 links = [
 { name = "home", url="/"},
-{ name = "archive", url = "/archive/" },
+{ name = "writing", url = "/writing/" },
+{ name = "lists", url="/lists"},
 { name = "about",   url = "/about/"   },
 { name = "focus",     url = "/focus/"     },
-{ name = "connect", url = "/about#connect"}
-
 ]
 
 footer_msg = "Working notes and essays."

@@ -7,76 +7,96 @@
     {% set webp_srcset = "" %}
     {% set fallback_srcset = "" %}
     {% set fallback_mime = "image/jpeg" %}
+    {% set sizes_attr = config.extra.image_sizes | default(value="100vw") %}
 
     {% if not is_remote %}
         {% set meta = get_image_metadata(path=src) %}
-        {% set poster_url = get_url(path=src) %}
-        {% set width_attr = meta.width %}
-        {% set height_attr = meta.height %}
-        {% set native_format = meta.format | lower %}
-        {% if native_format == "jpg" %}
-            {% set native_format = "jpeg" %}
-        {% endif %}
-        {% set processable_formats = ["jpeg", "png", "webp"] %}
-
-        {% if native_format in processable_formats %}
-            {% set fallback_format = config.extra.image_fallback_format | default(value=native_format) %}
-            {% if fallback_format == "jpg" %}
-                {% set fallback_format = "jpeg" %}
+        {% if meta %}
+            {% set poster_url = get_url(path=src) %}
+            {% set width_attr = meta.width %}
+            {% set height_attr = meta.height %}
+            {% set native_format = meta.format | lower %}
+            {% if native_format == "jpg" %}
+                {% set native_format = "jpeg" %}
             {% endif %}
-            {% if fallback_format == "webp" %}
-                {% set fallback_format = native_format %}
-            {% endif %}
-            {% if fallback_format not in ["jpeg", "png"] %}
-                {% set fallback_format = "jpeg" %}
-            {% endif %}
-            {% set fallback_mime = "image/" ~ fallback_format %}
-            {% set fallback_quality = config.extra.image_quality | default(value=82) %}
-            {% set webp_quality = config.extra.image_webp_quality | default(value=78) %}
-            {% set target_widths = [320, 480, 768, 1024, 1440, 1920, 2560, 3200, 3840, 5120, 6144] %}
-            {% set max_render_width = 0 %}
 
-            {% for width in target_widths %}
-                {% if width <= meta.width %}
-                    {% set webp_variant = resize_image(path=src, width=width, op="fit_width", format="webp", quality=webp_quality) %}
-                    {% set fallback_variant = resize_image(path=src, width=width, op="fit_width", format=fallback_format, quality=fallback_quality) %}
+            {% set processable_formats = ["jpeg", "png", "webp"] %}
+            {% if native_format in processable_formats %}
+                {% set fallback_format = config.extra.image_fallback_format | default(value=native_format) %}
+                {% if fallback_format == "jpg" %}
+                    {% set fallback_format = "jpeg" %}
+                {% endif %}
+                {% if fallback_format == "webp" %}
+                    {% set fallback_format = native_format %}
+                {% endif %}
+                {% if fallback_format not in ["jpeg", "png"] %}
+                    {% set fallback_format = "jpeg" %}
+                {% endif %}
+                {% set fallback_mime = "image/" ~ fallback_format %}
 
-                    {% if webp_srcset != "" %}
-                        {% set webp_srcset = webp_srcset ~ ", " %}
-                        {% set fallback_srcset = fallback_srcset ~ ", " %}
+                {% set fallback_quality = config.extra.image_quality | default(value=82) %}
+                {% set webp_quality = config.extra.image_webp_quality | default(value=78) %}
+                {% set target_widths = config.extra.image_target_widths | default(value=[320, 480, 720, 960, 1280, 1600, 1920]) %}
+                {% set max_render_width = 0 %}
+
+                {% for width in target_widths %}
+                    {% if width <= meta.width %}
+                        {% set webp_variant = resize_image(path=src, width=width, op="fit_width", format="webp", quality=webp_quality) %}
+                        {% set fallback_variant = resize_image(path=src, width=width, op="fit_width", format=fallback_format, quality=fallback_quality) %}
+
+                        {% if webp_variant and fallback_variant %}
+                            {% if webp_srcset != "" %}
+                                {% set webp_srcset = webp_srcset ~ ", " %}
+                                {% set fallback_srcset = fallback_srcset ~ ", " %}
+                            {% endif %}
+                            {% set webp_srcset = webp_srcset ~ webp_variant.url ~ " " ~ webp_variant.width ~ "w" %}
+                            {% set fallback_srcset = fallback_srcset ~ fallback_variant.url ~ " " ~ fallback_variant.width ~ "w" %}
+
+                            {% if fallback_variant.width > max_render_width %}
+                                {% set max_render_width = fallback_variant.width %}
+                                {% set poster_url = fallback_variant.url %}
+                                {% set width_attr = fallback_variant.width %}
+                                {% set height_attr = fallback_variant.height %}
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
-                    {% set webp_srcset = webp_srcset ~ webp_variant.url ~ " " ~ webp_variant.width ~ "w" %}
-                    {% set fallback_srcset = fallback_srcset ~ fallback_variant.url ~ " " ~ fallback_variant.width ~ "w" %}
+                {% endfor %}
 
-                    {% if fallback_variant.width > max_render_width %}
-                        {% set max_render_width = fallback_variant.width %}
+                {% if webp_srcset == "" %}
+                    {% set fallback_variant = resize_image(path=src, width=meta.width, op="fit_width", format=fallback_format, quality=fallback_quality) %}
+                    {% set webp_variant = resize_image(path=src, width=meta.width, op="fit_width", format="webp", quality=webp_quality) %}
+
+                    {% if fallback_variant %}
+                        {% set fallback_srcset = fallback_variant.url ~ " " ~ fallback_variant.width ~ "w" %}
                         {% set poster_url = fallback_variant.url %}
                         {% set width_attr = fallback_variant.width %}
                         {% set height_attr = fallback_variant.height %}
                     {% endif %}
+
+                    {% if webp_variant %}
+                        {% set webp_srcset = webp_variant.url ~ " " ~ webp_variant.width ~ "w" %}
+                    {% endif %}
                 {% endif %}
-            {% endfor %}
 
-            {% if webp_srcset == "" %}
-                {% set fallback_variant = resize_image(path=src, width=meta.width, op="fit_width", format=fallback_format, quality=fallback_quality) %}
-                {% set webp_variant = resize_image(path=src, width=meta.width, op="fit_width", format="webp", quality=webp_quality) %}
-                {% set fallback_srcset = fallback_variant.url ~ " " ~ fallback_variant.width ~ "w" %}
-                {% set webp_srcset = webp_variant.url ~ " " ~ webp_variant.width ~ "w" %}
-                {% set poster_url = fallback_variant.url %}
-                {% set width_attr = fallback_variant.width %}
-                {% set height_attr = fallback_variant.height %}
-            {% endif %}
-
-            {% if webp_srcset != "" and fallback_srcset != "" %}
-                {% set render_picture = true %}
+                {% if webp_srcset != "" and fallback_srcset != "" %}
+                    {% set render_picture = true %}
+                {% endif %}
             {% endif %}
         {% endif %}
     {% endif %}
 
     {% if render_picture %}
-    <picture>
-        <source srcset="{{ webp_srcset }}" sizes="100vw" type="image/webp" />
-        <</picture>source srcset="{{ fallback_srcset }}" sizes="100vw" type="{{ fallback_mime }}" />
+    <picture></picture>
+        <source
+            srcset="{{ webp_srcset }}"
+            sizes="{{ sizes_attr }}"
+            type="image/webp"
+        />
+        <source
+            srcset="{{ fallback_srcset }}"
+            sizes="{{ sizes_attr }}"
+            type="{{ fallback_mime }}"
+        />
         <img
             src="{{ poster_url | safe }}"
             alt="{{ alt | safe }}"
@@ -97,10 +117,5 @@
         loading="lazy"
         decoding="async"
     />
-    {% endif %}
-    {% if title %}
-    <figcaption class="image-caption"><em>{{ title | safe }}</em></figcaption>
-    {% elif alt %}
-    <figcaption class="image-caption"><em>{{ alt | safe }}</em></figcaption>
     {% endif %}
 </figure>

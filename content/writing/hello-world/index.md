@@ -1,6 +1,7 @@
 ---
 title: Hello World
 date: 2014-09-26T00:00:00.000Z
+description: "Introductory note launching the blog and sharing plans to write about projects and trips."
 excerpt: My first post on a personal blog
 ---
 ![Back-country Skiing in the Selkirk Mountains](profile-ski.jpg "Back-country Skiing in the Selkirk Mountains")

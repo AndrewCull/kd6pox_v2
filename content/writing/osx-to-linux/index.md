@@ -1,6 +1,7 @@
 ---
 title: "Moving back to Linux from Mac OSX"
 date: "2016-10-06"
+description: "Why switching back to Linux improved focus, tooling flexibility, and day-to-day client work."
 layout: post
 path: "/osx-to-linux/"
 ---

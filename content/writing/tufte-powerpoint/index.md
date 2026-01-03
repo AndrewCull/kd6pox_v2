@@ -1,6 +1,7 @@
 ---
-title: Creating Effective Presentations for Business and Life in General
+title: Creating Effective Presentations with PowerPoint
 date: 2014-11-20
+description: "Concise guide to building high-signal presentations using Edward Tufte's design principles."
 excerpt: Power Point is the most improperly used software on the planet, let's
   make it less boring
 ---

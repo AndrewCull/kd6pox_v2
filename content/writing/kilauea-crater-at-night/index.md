@@ -1,6 +1,7 @@
 ---
 title: "The Kīlauea Crater at Night"
 date: 2015-11-06
+description: "Night photo of the Kīlauea crater and reflections on visiting Hawaii's volcanic landscape."
 excerpt: "The red glow from the Kīlauea Crater."
 ---
 

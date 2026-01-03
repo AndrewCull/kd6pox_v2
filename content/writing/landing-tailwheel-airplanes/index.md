@@ -1,6 +1,7 @@
 ---
 title: Landing Tailwheel Airplanes
 date: 2015-09-26
+description: "Wheel-landing technique notes for tailwheel pilots flying the Cessna 180/185."
 layout: post
 path: /landing-tailwheel-airplanes/
 ---

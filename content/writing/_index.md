@@ -1,7 +1,8 @@
 +++
 title = "Writing"
+description = "All essays and working notes, sorted by publish date."
 sort_by = "date"
-paginate_by = 20
-template = "index.html"
+
+template = "writing.html"
 page_template = "writing-page.html"
 +++

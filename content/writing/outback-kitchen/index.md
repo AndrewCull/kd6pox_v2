@@ -1,6 +1,7 @@
 ---
 title: "The Outback Kitchen"
 date: "2015-09-26"
+description: "Dialed backcountry kitchen setup that keeps camp cooking easy in the mountains."
 excerpt: "Camp cooking with style."
 ---
 ![Camp cooking setup](camping-kitchen.jpg "Camp cooking setup")

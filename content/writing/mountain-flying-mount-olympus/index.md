@@ -1,6 +1,7 @@
 ---
 title: "Mountain Flight Over Mount Olympus, WA"
 date: "2014-11-23"
+description: "Sunlit flight over Mount Olympus with reflections on clear-air mountain flying."
 
 excerpt: "Flying in the mountains in clear air."
 tags:

@@ -1,13 +1,58 @@
-{% extends "base.html" %} {% block content %}
-<h2>Archive</h2>
+{% extends "base.html" %}
+{% block content %}
+<section class="archive">
+    {% if section is defined and section.title %}
+    <h1>{{ section.title }}</h1>
+    {% elif page is defined and page.title %}
+    <h1>{{ page.title }}</h1>
+    {% else %}
+    <h1>Archive</h1></h1>
+    {% endif %}
 
-{% set section = get_section(path="writing/_index.md") %} {% for year, posts in
-section.pages | group_by(attribute="year") %}
-<h3 class="archive-year">{{ year }}</h3>
+    {% if section is defined and section.description %}
+    <p>{{ section.description }}</p>
+    {% elif page is defined and page.description %}
+    <p>{{ page.description }}</p>
+    {% endif %}
 
-<ul class="archive-year-list">
-    {% for post in posts %}
-    <li><a href="{{ post.permalink | safe }}">{{ post.title }}</a></li>
-    {% endfor %}
-</ul>
-{% endfor %} {% endblock content %}
+    {% set archive_entries = [] %}
+    {% if paginator is defined and paginator.pages is defined %}
+        {% set archive_entries = paginator.pages %}
+    {% elif section is defined and section.pages is defined %}
+        {% set archive_entries = section.pages %}
+    {% elif page is defined and page.extra is defined and page.extra.archive_pages is defined %}
+        {% set archive_entries = page.extra.archive_pages %}
+    {% endif %}
+
+    {% if archive_entries | length > 0 %}
+        {% for group in archive_entries | group_by(attribute="year") | sort(attribute="key") | reverse %}
+        <h3 class="archive-year">{{ group.key }}</h3>
+        <ul class="archive-year-list">
+            {% for entry in group.value | sort(attribute="date") | reverse %}
+            <li></li>
+                <a href="{{ entry.permalink | safe }}">{{ entry.title }}</a>
+                {% if entry.date %}
+                <time datetime="{{ entry.date | date(format="%Y-%m-%d") }}">
+                    {{ entry.date | date(format="%d %b %Y") }}
+                </time>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    {% else %}
+    <p>No entries yet.</p>
+    {% endif %}
+
+    {% if paginator is defined %}
+    <nav class="post-nav" aria-label="Archive pagination">
+        {% if paginator.previous %}
+        <a href="{{ paginator.previous_page_path | safe }}">← Newer</a>
+        {% endif %}
+        {% if paginator.next %}
+        <a href="{{ paginator.next_page_path | safe }}">Older →</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</section>
+{% endblock content %}
