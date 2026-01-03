@@ -6,8 +6,7 @@
       <header>
         <h1>{{ page.title }}</h1>
         {% if page.date %}
-          <p class="meta">
-          {% if config.extra.author_name %}{{ config.extra.author_name }}{% endif %}<br/>
+          <span class="meta">
             {% if page.updated_at %}
               <time datetime="{{ page.updated_at | date(format="%+") }}">
                 {{ page.updated_at | date(format="%d %b %Y") }}
@@ -21,7 +20,7 @@
                 {{ page.date | date(format="%d %b %Y") }}
               </time>
             {% endif %}
-          </p>
+          </span>
         {% endif %}
       </header>
 

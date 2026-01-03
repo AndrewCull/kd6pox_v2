@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block content %}
+<section class="home-lists">
+    {% set list_pages = [] %} {% if section is defined and
+    section.pages is defined %} {% set list_pages = section.pages %} {% elif
+    page is defined and page.extra is defined and page.extra.list_pages is
+    defined %} {% set list_pages = page.extra.list_pages %} {% endif %} {% if
+    list_pages | length > 0 %}
+    <ul>
+        {% for entry in list_pages %}
+        <li>
+            <a href="{{ entry.permalink | safe }}">{{ entry.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No lists available yet.</p>
+    {% endif %}
+</section>
+{% endblock content %}

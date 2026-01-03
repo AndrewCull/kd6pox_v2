@@ -1,17 +1,29 @@
 {% extends "base.html" %} {% block content %}
-<h1>{{ config.title }}</h1>
-
 {% if config.description %}
 <p>{{ config.description }}</p>
-{% endif %} {# Show latest posts from the writing section #} {% set writing =
-get_section(path="writing/_index.md") %}
+{% endif %} {% set writing = get_section(path="writing/_index.md") %} {% set
+lists = get_section(path="lists/_index.md") %}
 
-<h2>Writing</h2>
-<ul>
-    {% for p in writing.pages | slice(end=15) %}
-    <li>
-        <a href="{{ p.permalink | safe }}">{{ p.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
-{% endblock content %}
+<section class="home-writing">
+    <h2>Writing</h2>
+    <ul>
+        {% for p in writing.pages | slice(end=15) %}
+        <li>
+            <a href="{{ p.permalink | safe }}">{{ p.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% if lists.pages %}
+<section class="home-lists">
+    <h2>Lists</h2>
+    <ul>
+        {% for list_page in lists.pages | slice(end=15) %}
+        <li>
+            <a href="{{ list_page.permalink | safe }}">{{ list_page.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %} {% endblock content %}

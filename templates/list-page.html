@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="post-article list-article">
+    <div class="post-top">
+        <header>
+            <h1>{{ page.title }}</h1>
+            {% if page.date %}
+            <span class="meta">
+                {% if page.updated_at %}
+                <time datetime="{{ page.updated_at | date(format="%+") }}">
+                    {{ page.updated_at | date(format="%d %b %Y") }}
+                </time>
+                (original:
+                <time datetime="{{ page.date | date(format="%+") }}">
+                    {{ page.date | date(format="%d %b %Y") }}
+                </time>)
+                {% else %}
+                <time datetime="{{ page.date | date(format="%+") }}">
+                    {{ page.date | date(format="%d %b %Y") }}
+                </time>
+                {% endif %}
+            </span>
+            {% endif %}
+            {% if page.description %}
+            <p class="summary">{{ page.description }}</p>
+            {% endif %}
+        </header>
+
+        <div class="list-body">
+            {{ page.content | safe }}
+        </div>
+
+        <div class="share-links">
+            Share on&nbsp;
+            <a href="https://twitter.com/intent/tweet?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">X</a>
+            &nbsp;or&nbsp;
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </div>
+
+    <div class="post-bottom">
+        <nav class="post-nav">
+            {% if page.lower %}
+            <a href="{{ page.lower.permalink | safe }}">← {{ page.lower.title }}</a>
+            {% endif %}
+            {% if page.higher %}
+            <a href="{{ page.higher.permalink | safe }}">{{ page.higher.title }} →</a>
+            {% endif %}
+        </nav>
+    </div>
+</article>
+{% endblock content %}

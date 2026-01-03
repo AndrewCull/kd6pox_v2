@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="archive">
+
+    {% set archive_entries = [] %}
+
+    {% if paginator is defined and paginator.pages is defined %}
+    {% set archive_entries = paginator.pages %}
+    {% elif section is defined and section.pages is defined %}
+    {% set archive_entries = section.pages %}
+    {% elif page is defined and page.extra is defined and page.extra.archive_pages is defined %}
+    {% set archive_entries = page.extra.archive_pages %}
+    {% endif %}
+
+    {% if archive_entries | length > 0 %}
+    {% set ordered_entries = archive_entries | sort(attribute="date") | reverse %}
+    {% set_global current_year = "" %}
+
+    {% for entry in ordered_entries %}
+        {% if entry.date %}
+        {% set entry_year = entry.date | date(format="%Y") %}
+
+        {% if entry_year != current_year %}
+            {% if current_year != "" %}
+            </ul>
+            {% endif %}
+
+            <h3 class="archive-year">{{ entry_year }}</h3>
+            <ul class="archive-year-list">
+            {% set_global current_year = entry_year %}
+        {% endif %}
+
+        <li>
+            <a href="{{ entry.permalink | safe }}">{{ entry.title }}</a>
+        </li>
+        {% endif %}
+
+        {% if loop.last %}
+        </ul>
+        {% endif %}
+    {% endfor %}
+    {% else %}
+    <p>No entries yet.</p>
+    {% endif %}
+</section>
+{% endblock content %}

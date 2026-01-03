@@ -1,11 +1,86 @@
 body {
-    line-height: 1.4;
-    font-size: 18px;
+    line-height: 1.5;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* 16px → 18px fluid */
     padding: 0 10px;
-    margin: 0; /* reset outer margin for sticky footer layout */
+    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+/* Site header / navbar - understated, browser-default aesthetic */
+.site-header {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.site-header.wrap {
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+}
+
+.site-nav {
+    display: flex !important;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.site-name {
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    width: auto;
+}
+
+.site-name:hover {
+    text-decoration: underline;
+}
+
+.nav-links {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+    width: auto;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Post header: tighten title and date */
+.post-article header h1 {
+    margin-bottom: 0.25rem;
+}
+
+.post-article header .meta {
+    display: block;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #6b6b6b;
+}
+
+h1 {
+    font-size: 1.2em;
+}
+
+h2 {
+    font-size: 1.1em;
 }
 
 /* Main content wrapper for text */
@@ -17,23 +92,30 @@ body {
 /* Also support the .wrap class used in templates */
 .wrap {
     max-width: 52em;
+    width: 100%;
     margin: 0 auto;
-    padding: 1.25rem 1rem; /* extra internal spacing for content */
+    padding: 1.25rem 1rem;
     box-sizing: border-box;
 }
 
-/* Make the page a column flex container so the footer can stick to the bottom.
-   The main content area (the <main class="wrap"> element) should expand to
-   fill available vertical space, pushing the footer to the bottom when content
-   is short. */
+/* Make the page a column flex container so the footer can stick to the bottom. */
 .page {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     min-height: 100vh;
 }
-/* Ensure the main content (first .wrap inside .page) grows to fill space */
+
+/* Main content fills available vertical space */
 main.wrap {
     flex: 1 0 auto;
+}
+
+/* All wrap children should be block and left-aligned */
+.wrap > * {
+    display: block;
+    text-align: left;
+    width: 100%;
 }
 
 /* Make individual posts layout as column flex containers so parts below
@@ -170,108 +252,125 @@ img {
     justify-content: flex-start;
 }
 
-/* Footer layout: single row on desktop, centered stack on mobile */
-.footer-row,
-.site-footer .post-nav {
-    display: flex;
-    align-items: center;
+/* Footer layout: stretched left/right like navbar */
+.site-footer {
+    border-top: 1px solid #e0e0e0;
+}
+
+.site-footer.wrap {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.footer-content {
+    display: flex !important;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
     width: 100%;
-    padding: 0.75rem 0;
     box-sizing: border-box;
-    flex-wrap: nowrap;
-}
-
-/* Left column */
-.footer-left,
-.site-footer .post-nav .footer-left {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-}
-
-/* Center column */
-.footer-center,
-.site-footer .post-nav .footer-center {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Ensure centered links don't wrap awkwardly on wide screens */
-.footer-center .footer-links,
-.site-footer .post-nav .footer-center .footer-links {
-    white-space: nowrap;
-    font-size: 0.95rem;
-}
-
-/* Right column */
-.footer-right,
-.site-footer .post-nav .footer-right {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    text-align: right;
-    white-space: nowrap;
     font-size: 0.95rem;
     color: #6b6b6b;
 }
 
-/* Mobile: stack footer elements and center them */
-@media (max-width: 48em) {
-    .footer-row,
-    .site-footer .post-nav {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 0.75rem;
-    }
-
-    .footer-left,
-    .footer-center,
-    .footer-right,
-    .site-footer .post-nav .footer-left,
-    .site-footer .post-nav .footer-center,
-    .site-footer .post-nav .footer-right {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .footer-right,
-    .site-footer .post-nav .footer-right {
-        white-space: normal;
-    }
-
-    /* Allow the center links to wrap on very small screens */
-    .footer-center .footer-links,
-    .site-footer .post-nav .footer-center .footer-links {
-        white-space: normal;
-    }
+.footer-left,
+.footer-right {
+    width: auto;
 }
 
-/* Archive layout: left-align year headings and lists */
+.home-writing,
+.home-lists {
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.home-writing ul,
+.home-lists ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.home-writing li,
+.home-lists li {
+    display: block;
+    margin: 0.55rem 0;
+    width: 100%;
+}
+
+.list-article header h1 {
+    margin-bottom: 0.25rem;
+}
+
+.list-article header .meta {
+    display: block;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #6b6b6b;
+    margin-bottom: 1rem;
+}
+
+.list-article .summary {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.list-article .list-body {
+    text-align: left;
+}
+
+.list-article .list-body ul,
+.list-article .list-body ol {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+
+.list-article .list-body li {
+    display: block;
+    margin: 0.5rem 0;
+    padding-left: 0;
+}
+
+.list-article .list-body li input[type="checkbox"] {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Archive layout: match home-writing exactly */
+.archive {
+    text-align: left;
+    margin-top: 0;
+}
+
 .archive-year {
+    display: block;
+    width: 100%;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    text-align: left;
 }
 
 .archive-year-list {
     list-style: none;
     padding-left: 0;
-    margin-top: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .archive-year-list li {
-    margin: 0.9rem 0;
+    display: block;
+    margin: 0.5rem 0;
+    width: 100%;
 }
 
 /* Small, muted copyright line at the very bottom */
@@ -302,15 +401,17 @@ img {
     }
 
     /* Keep footer readable but subtle */
-    .site-footer,
-    .site-note,
-    .footer-msg,
-    .footer-links {
-        color: #d0d0d0;
+    .site-footer {
+        border-top-color: rgba(255, 255, 255, 0.1);
     }
 
-    .site-footer {
-        background: transparent;
+    .footer-content {
+        color: #999999;
+    }
+
+    .post-article header .meta,
+    .list-article header .meta {
+        color: #999999;
     }
 
     /* Post nav links */
@@ -335,6 +436,11 @@ img {
     /* HR or subtle separators */
     hr {
         border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Navbar border in dark mode */
+    .site-header {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
     }
 
     /* Ensure media (images/video) don't get unwanted backgrounds */

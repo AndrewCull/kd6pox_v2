@@ -3,12 +3,33 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% if page and page.description %}
+        <meta
+            name="description"
+            content="{{ page.description | striptags | trim }}"
+        />
+        {% elif page and page.summary %}
+        <meta
+            name="description"
+            content="{{ page.summary | striptags | trim }}"
+        />
+        {% elif section and section.description %}
+        <meta
+            name="description"
+            content="{{ section.description | striptags | trim }}"
+        />
+        {% elif config.description %}
+        <meta
+            name="description"
+            content="{{ config.description | striptags | trim }}"
+        />
+        {% endif %}
         <title>
             {% if page and page.title %}{{ page.title }} · {% endif %} {% if
             section and section.title %}{{ section.title }} · {% endif %} {{
             config.title }}
         </title>
-        <link rel="stylesheet" href="{{ get_url(path='site.css') }}" />
+        <link rel="stylesheet" href="/site.css" />
         {% if config.generate_feeds %}
         <link
             rel="alternate"
@@ -29,27 +50,24 @@
 
     <body>
         <div class="page">
-            <main class="wrap">{% block content %}{% endblock content %}</main>
-            <footer class="wrap site-footer">
-                <nav class="post-nav footer-row" aria-label="Footer">
-                    <div class="footer-left">
-                        {% if config.extra.footer_msg %}{{
-                        config.extra.footer_msg }}{% endif %}
-                    </div>
-
-                    <div class="footer-center" aria-hidden="false">
-                        <div class="footer-links">
-                            {% for l in config.extra.links %}
-                            <a href="{{ l.url }}">{{ l.name }}</a>{% if not
-                            loop.last %} · {% endif %} {% endfor %}
-                        </div>
-                    </div>
-
-                    <div class="footer-right">
-                        &copy; {{ now() | date(format="%Y") }} {{
-                        config.extra.author_name }}
-                    </div>
+            <header class="site-header wrap">
+                <nav class="site-nav" aria-label="Main">
+                    <a href="/" class="site-name">{{ config.extra.author_name }}</a>
+                    <ul class="nav-links">
+                        {% for l in config.extra.links %}
+                        {% if l.url != "/" %}
+                        <li><a href="{{ l.url }}">{{ l.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
                 </nav>
+            </header>
+            <main class="wrap">{% block content %}{% endblock content %}</main>
+            <footer class="site-footer wrap">
+                <div class="footer-content">
+                    <span class="footer-left">{% if config.extra.footer_msg %}{{ config.extra.footer_msg }}{% endif %}</span>
+                    <span class="footer-right">&copy; {{ now() | date(format="%Y") }} {{ config.extra.author_name }}</span>
+                </div>
             </footer>
         </div>
     </body>
