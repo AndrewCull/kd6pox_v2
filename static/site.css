@@ -1,21 +1,27 @@
 body {
-    line-height: 1.5;
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); /* 16px → 18px fluid */
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.65;
+    font-size: clamp(0.875rem, 0.84rem + 0.2vw, 1rem); /* 14px → 16px fluid — monospace reads larger */
+    font-weight: 400;
+    letter-spacing: -0.01em;
     padding: 0 10px;
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Site header / navbar - understated, browser-default aesthetic */
+/* Site header / navbar — wider than text column to frame the page */
 .site-header {
     border-bottom: 1px solid #e0e0e0;
 }
 
 .site-header.wrap {
-    padding-top: 1rem;
-    padding-bottom: 0.75rem;
+    max-width: 64em;
+    padding-top: 1.25rem;
+    padding-bottom: 1rem;
 }
 
 .site-nav {
@@ -33,6 +39,7 @@ body {
     text-decoration: none;
     color: inherit;
     width: auto;
+    letter-spacing: -0.02em;
 }
 
 .site-name:hover {
@@ -42,11 +49,11 @@ body {
 .nav-links {
     display: flex !important;
     flex-wrap: wrap;
-    gap: 0.25rem 1rem;
+    gap: 0.25rem 1.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     width: auto;
 }
 
@@ -70,28 +77,40 @@ body {
 
 .post-article header .meta {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-style: italic;
     color: #6b6b6b;
+    font-weight: 300;
 }
 
 h1 {
-    font-size: 1.2em;
+    font-size: 1.25em;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
 }
 
 h2 {
     font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: 600;
 }
 
 /* Main content wrapper for text */
 #maincontent {
-    max-width: 42em;
+    max-width: 38em; /* tighter for monospace readability */
     margin: 15px auto;
 }
 
 /* Also support the .wrap class used in templates */
 .wrap {
-    max-width: 52em;
+    max-width: 48em;
     width: 100%;
     margin: 0 auto;
     padding: 1.25rem 1rem;
@@ -104,6 +123,7 @@ h2 {
     flex-direction: column;
     align-items: stretch;
     min-height: 100vh;
+    overflow: clip;
 }
 
 /* Main content fills available vertical space */
@@ -123,7 +143,6 @@ main.wrap {
 .post-article {
     display: flex;
     flex-direction: column;
-    /* allow the article to take available vertical space; adjust if you want taller posts */
     min-height: 60vh;
 }
 
@@ -147,41 +166,41 @@ img {
 }
 
 /* Figure with caption styling produced by the image render hook.
-   The caption uses the image alt/text (or title) in italic. */
+   Images break out wider than the text column to add visual rhythm. */
 .image-figure {
-    margin: 1.25rem 0;
+    margin: 2.5rem 0;
     text-align: center;
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 64em;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .image-figure img {
     display: block;
-    margin: 0 auto 0.5rem auto;
+    margin: 0 auto;
     max-width: 100%;
     height: auto;
+    border-radius: 2px;
 }
 
 .image-caption {
-    font-size: 0.94rem;
-    color: #666;
+    font-size: 0.8rem;
+    color: #888;
     font-style: italic;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
 }
 
-/* Allow media (images, video, figure) inside the main content to break out
-   wider than the text flow. They will be up to 52em, centered, and constrained
-   by the viewport width when necessary. */
-.wrap img,
+/* Media defaults inside the main content */
 .wrap video,
-.wrap figure,
 .wrap iframe {
-    /* allow a wider maximum for media while ensuring they never exceed their container */
-    max-width: min(52em, 100%);
-    /* make media responsive: fill available width of the wrap but never overflow viewport */
+    max-width: min(48em, 100%);
     width: 100%;
     display: block;
     margin-top: 20px;
     margin-bottom: 20px;
-    /* center media within the wrap */
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
@@ -193,11 +212,8 @@ img {
     border: 0;
 }
 
-/* If the viewport is narrower than the breakout amount, ensure media are fully responsive */
-@media (max-width: 52em) {
-    .wrap img,
+@media (max-width: 48em) {
     .wrap video,
-    .wrap figure,
     .wrap iframe {
         width: 100%;
         margin-left: auto;
@@ -217,7 +233,6 @@ img {
     padding: 0.25rem 0;
 }
 
-/* Ensure links look consistent */
 .post-nav a {
     color: inherit;
     text-decoration: none;
@@ -227,7 +242,7 @@ img {
 .share-links {
     margin-top: 1.5rem;
     margin-bottom: 2rem;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: inherit;
     line-height: 1.3;
 }
@@ -241,7 +256,7 @@ img {
 }
 
 .external-link-note {
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: #6b6b6b;
     font-style: italic;
 }
@@ -252,12 +267,13 @@ img {
     justify-content: flex-start;
 }
 
-/* Footer layout: stretched left/right like navbar */
+/* Footer layout — wider than text column to match header */
 .site-footer {
     border-top: 1px solid #e0e0e0;
 }
 
 .site-footer.wrap {
+    max-width: 64em;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -270,7 +286,7 @@ img {
     gap: 0.5rem 1.5rem;
     width: 100%;
     box-sizing: border-box;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #6b6b6b;
 }
 
@@ -309,9 +325,10 @@ img {
 
 .list-article header .meta {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-style: italic;
     color: #6b6b6b;
+    font-weight: 300;
     margin-bottom: 1rem;
 }
 
@@ -342,7 +359,7 @@ img {
     vertical-align: middle;
 }
 
-/* Archive layout: match home-writing exactly */
+/* Archive layout */
 .archive {
     text-align: left;
     margin-top: 0;
@@ -373,24 +390,53 @@ img {
     width: 100%;
 }
 
-/* Small, muted copyright line at the very bottom */
+/* Small, muted copyright line */
 .site-copyright {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #6b6b6b;
     text-align: center;
     margin-top: 1.25rem;
     margin-bottom: 1rem;
 }
 
-/* Dark mode: follow user's OS/browser preference */
+/* Blockquotes */
+blockquote {
+    border-left: 2px solid #d0d0d0;
+    margin: 1.5rem 0;
+    padding: 0 1rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Code blocks — already monospace, just refine */
+code {
+    font-size: 1em;
+    background: #f5f5f5;
+    padding: 0.15em 0.35em;
+    border-radius: 2px;
+}
+
+pre {
+    background: #f5f5f5;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 2px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
-    /* Page background and default text color */
     body {
         background-color: #121212;
-        color: #fafafa;
+        color: #e0e0e0;
     }
 
-    /* Links: a slightly muted blue for contrast */
     a {
         color: #90caf9;
     }
@@ -400,53 +446,62 @@ img {
         text-decoration: underline;
     }
 
-    /* Keep footer readable but subtle */
     .site-footer {
         border-top-color: rgba(255, 255, 255, 0.1);
     }
 
     .footer-content {
-        color: #999999;
+        color: #888;
     }
 
     .post-article header .meta,
     .list-article header .meta {
-        color: #999999;
+        color: #888;
     }
 
-    /* Post nav links */
     .post-nav a {
-        color: #fafafa;
+        color: #e0e0e0;
     }
 
     .external-link-note {
-        color: #bcbcbc;
+        color: #999;
     }
 
-    /* Archive year headings */
     .archive-year {
         color: #ffffff;
     }
 
-    /* Muted copyright in dark mode */
     .site-copyright {
-        color: #999999;
+        color: #888;
     }
 
-    /* HR or subtle separators */
     hr {
         border-color: rgba(255, 255, 255, 0.06);
     }
 
-    /* Navbar border in dark mode */
     .site-header {
         border-bottom-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* Ensure media (images/video) don't get unwanted backgrounds */
-    .wrap img,
     .wrap video,
     .wrap figure {
         background: transparent;
+    }
+
+    blockquote {
+        border-left-color: rgba(255, 255, 255, 0.15);
+        color: #aaa;
+    }
+
+    code {
+        background: #1e1e1e;
+    }
+
+    pre {
+        background: #1e1e1e;
+    }
+
+    .image-caption {
+        color: #777;
     }
 }

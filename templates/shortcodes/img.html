@@ -1,0 +1,11 @@
+<figure class="image-figure">
+    <img
+        src="{{ src }}"
+        alt="{{ alt | default(value='') }}"
+        loading="lazy"
+        decoding="async"
+    />
+    {% if alt %}
+    <figcaption class="image-caption">{{ alt }}</figcaption>
+    {% endif %}
+</figure>

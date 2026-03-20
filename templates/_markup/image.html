@@ -118,4 +118,8 @@
         decoding="async"
     />
     {% endif %}
+
+    {% if alt %}
+    <figcaption class="image-caption">{{ alt | safe }}</figcaption>
+    {% endif %}
 </figure>
