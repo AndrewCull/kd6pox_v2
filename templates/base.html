@@ -49,8 +49,6 @@
             async
         ></script>
         {% endif %}
-        <!-- 100% privacy-first analytics -->
-        <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     </head>
 
     <body>
@@ -71,5 +69,7 @@
             &nbsp;&middot;&nbsp;
             &copy; {{ now() | date(format="%Y") }} {{ config.extra.author_name }}
         </footer>
+        <!-- 100% privacy-first analytics -->
+        <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     </body>
 </html>
