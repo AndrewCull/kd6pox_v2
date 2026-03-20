@@ -365,7 +365,7 @@ label.margin-toggle:not(.sidenote-number) {
 
 .sidenote,
 .marginnote {
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   color: var(--text-secondary);
   clear: right;
@@ -486,8 +486,15 @@ img {
   border-radius: 2px;
 }
 
+@media (min-width: 1000px) {
+  .image-figure.fullwidth {
+    max-width: none;
+    width: calc(100% + var(--margin-w) + 3rem);
+  }
+}
+
 .image-caption {
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   font-style: italic;
   margin-top: 0.5rem;

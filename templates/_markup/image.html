@@ -1,4 +1,4 @@
-<figure class="image-figure">
+<figure class="image-figure fullwidth">
     {% set is_remote = src is starting_with("http://") or src is starting_with("https://") %}
     {% set poster_url = src %}
     {% set width_attr = none %}
@@ -86,7 +86,7 @@
     {% endif %}
 
     {% if render_picture %}
-    <picture></picture>
+    <picture>
         <source
             srcset="{{ webp_srcset }}"
             sizes="{{ sizes_attr }}"
