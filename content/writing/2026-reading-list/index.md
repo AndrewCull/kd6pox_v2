@@ -7,7 +7,7 @@ path: "/2026-reading-list/"
 ---
 {% newthought() %}The world is changing rapidly.{% end %}  My daily work is filled with strategy, artificial intelligence, and optimizing organizational structures for the rapidly changing way people are working both together. In the past, half of the books I read were skill-based - books on leadership, strategy, technology etc while the others were personal interest, philosophy, classics, and history mostly.
 
-I set out to compile a reading list for our current time, most notably to focus on power structures and the rise and fall of institutions as the US undergoes serious changes on all fronts. Understanding the control of information, dis-information, and the economy were my primary motivations - those topics in my view cannot be adequately understood without also understanding the inner world, the psychology, mythology, and religions that shape our respective worldviews as societies and inviduals.  I'm also a fan of Jung and formally studied Jungian Psychology for two years over a decade ago, so I'm re-reading these texts for the third and fourth time (you pick up different things during different stages of life, at 47 it's a different book than I read in my 30s).
+I set out to compile a reading list for our current time, most notably to focus on power structures and the rise and fall of institutions as the US undergoes serious changes on all fronts. Understanding the control of information, dis-information, and the economy were my primary motivations - those topics in my view cannot be adequately understood without also understanding the inner world, the psychology, mythology, and religions that shape our respective worldviews as societies and inviduals.  I'm also a fan of Jung and formally studied Jungian Psychology for two years over a decade ago, so I'm re-reading these texts for the third and fourth time.{% sidenote(id="reread") %}You pick up different things during different stages of life. At 47 it's a different book than I read in my 30s.{% end %}
 
 During Covid lockdown, I read [Jordan Peterson's recommended reading list](https://www.jordanbpeterson.com/books/) which was a bit smaller than it is now. While fascinating, but mostly terrifying, I found myself often in deep reflection and reference the passages often trying to make sense of the world. Some are included here again.
 
@@ -17,7 +17,7 @@ I had been building a list for the past year around depth psychology, sacred tex
 
 I'm trying to read an hour a day however even with that, it's likely going to bleed into 2027. After some research, a bit of AI reorganization and justification I put together a sequence of the books I was most interested in.The order is intentional, and each book should hand something to the next one.
 
-AI recommended the particular versions listed below, and I spot checked them. Please reach out to me if you have better options. I stopped using my kindle a couple years ago in favor of real books, mostly to support libraries and independent bookstores. You'll want to own these books, consider buying from [Bookshop.org](https://www.bookshop.org) or even better your local independent bookstore.
+AI recommended the particular versions listed below, and I spot checked them. Please reach out to me if you have better options. I stopped using my kindle a couple years ago in favor of real books, mostly to support libraries and independent bookstores.{% marginnote(id="bookshop") %}You'll want to own these books. Consider buying from [Bookshop.org](https://www.bookshop.org) or even better your local independent bookstore.{% end %}
 
 ---
 
@@ -51,7 +51,7 @@ Establish both frameworks simultaneously.
 
 How knowledge works. How the self is structured.
 
-- *The Use of Knowledge in Society* + *Constitution of Liberty* Ch. 2 — Hayek. The essay is 15 pages and free at econlib.org. The epistemological argument against central planning.
+- *The Use of Knowledge in Society* + *Constitution of Liberty* Ch. 2 — Hayek.{% sidenote(id="hayek") %}The essay is 15 pages and free at econlib.org.{% end %} The epistemological argument against central planning.
 
 - *The Structure of Scientific Revolutions* — Kuhn. 50th Anniversary edition. Paradigm shifts aren't won by evidence — they're sociological events.
 
@@ -73,7 +73,7 @@ Primary sources of how most humans understand meaning. Not coverage — depth.
 
 - *Upanishads* (selected). Easwaran translation. Focus on Isha, Kena, Mundaka, Mandukya — together under 50 pages, contain the whole argument.
 
-- *The Bible* (selected). ESV or NRSV. Genesis, Job, Psalms, Ecclesiastes, Matthew, Romans. Job alone is worth a week.
+- *The Bible* (selected). ESV or NRSV. Genesis, Job, Psalms, Ecclesiastes, Matthew, Romans.{% sidenote(id="job") %}Job alone is worth a week.{% end %}
 
 - *The Quran* (selected). Abdel Haleem translation. Al-Fatiha, Al-Baqarah, Surah 3, 4, 12, 36, 55.
 
@@ -107,7 +107,7 @@ Archetypal psychology, individuation, mythological structure.
 
 - *Theory of Positive Disintegration* — Kazimierz Dabrowski. Psychological crisis as the mechanism of growth. Why breakdowns precede breakthroughs.
 
-- *The Red Book* — Carl Jung. Reader's Edition (W.W. Norton — not the facsimile). Read last in the Jung sequence. Requires everything above to be navigable.
+- *The Red Book* — Carl Jung. Reader's Edition.{% sidenote(id="redbook") %}Get the W.W. Norton Reader's Edition, not the facsimile. The facsimile is beautiful but impractical for actual reading.{% end %} Read last in the Jung sequence. Requires everything above to be navigable.
 
 ---
 
@@ -115,9 +115,9 @@ Archetypal psychology, individuation, mythological structure.
 
 How self-organizing systems work. How humans connect.
 
-- *Nobel Lecture* + *Understanding Institutional Diversity* — Elinor Ostrom. Lecture free at nobelprize.org; book: Princeton UP. Empirical demolition of both "government must manage" and "privatize everything."
+- *Nobel Lecture* + *Understanding Institutional Diversity* — Elinor Ostrom.{% sidenote(id="ostrom") %}The Nobel Lecture is free at nobelprize.org. The book is Princeton UP.{% end %} Empirical demolition of both "government must manage" and "privatize everything."
 
-- *Beyond Good and Evil* — Nietzsche. Kaufmann translation (Vintage). Read here — after Aristotle, Solzhenitsyn, Haidt, and Jung — not before. The critique of morality reads as serious challenge with full context behind it.
+- *Beyond Good and Evil* — Nietzsche. Kaufmann translation (Vintage). Read here — after Aristotle, Solzhenitsyn, Haidt, and Jung — not before.{% sidenote(id="nietzsche") %}The critique of morality reads as a serious challenge with full context behind it. Read earlier, he's more likely to be merely provocative.{% end %}
 
 - *The Art of Loving* — Erich Fromm. Harper Perennial. Love is a practice, not a feeling. Brief, precise, underrated.
 
