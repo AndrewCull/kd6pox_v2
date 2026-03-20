@@ -29,10 +29,11 @@
             section and section.title %}{{ section.title }} · {% endif %} {{
             config.title }}
         </title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="/site.css" />
+        <link rel="preload" href="/fonts/et-book/et-book-roman-line-figures.woff"
+              as="font" type="font/woff" crossorigin>
+        <link rel="preload" href="/fonts/et-book/et-book-display-italic-old-style-figures.woff"
+              as="font" type="font/woff" crossorigin>
+        <link rel="stylesheet" href="/style.css" />
         {% if config.generate_feeds %}
         <link
             rel="alternate"
@@ -42,7 +43,6 @@
         />
         {% endif %} {% if config.extra.ahrefs_data_key is defined and
         config.extra.ahrefs_data_key %}
-        <!-- Google tag (gtag.js) -->
         <script
             src="https://analytics.ahrefs.com/analytics.js"
             data-key="{{ config.extra.ahrefs_data_key }}"
@@ -52,26 +52,22 @@
     </head>
 
     <body>
-        <div class="page">
-            <header class="site-header wrap">
-                <nav class="site-nav" aria-label="Main">
-                    <a href="/" class="site-name">{{ config.extra.author_name }}</a>
-                    <ul class="nav-links">
-                        {% for l in config.extra.links %}
-                        {% if l.url != "/" %}
-                        <li><a href="{{ l.url }}">{{ l.name }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
-                </nav>
-            </header>
-            <main class="wrap">{% block content %}{% endblock content %}</main>
-            <footer class="site-footer wrap">
-                <div class="footer-content">
-                    <span class="footer-left">{% if config.extra.footer_msg %}{{ config.extra.footer_msg }}{% endif %}</span>
-                    <span class="footer-right">&copy; {{ now() | date(format="%Y") }} {{ config.extra.author_name }}</span>
-                </div>
-            </footer>
-        </div>
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        <header class="site-header">
+            <a href="/" class="site-name">{{ config.extra.author_name }}</a>
+            <nav aria-label="Site navigation">
+                {% for l in config.extra.links %}
+                {% if l.url != "/" %}
+                <a href="{{ l.url }}">{{ l.name }}</a>
+                {% endif %}
+                {% endfor %}
+            </nav>
+        </header>
+        <main id="main-content">{% block content %}{% endblock content %}</main>
+        <footer class="site-footer">
+            {% if config.extra.footer_msg %}{{ config.extra.footer_msg }}{% endif %}
+            &nbsp;&middot;&nbsp;
+            &copy; {{ now() | date(format="%Y") }} {{ config.extra.author_name }}
+        </footer>
     </body>
 </html>

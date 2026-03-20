@@ -2,28 +2,19 @@
 
 {% block content %}
   <article>
-    <header>
+    <section>
       <h1>{{ page.title }}</h1>
       {% if page.date %}
-        <p class="meta">
-          {% if page.updated_at %}
-            <time datetime="{{ page.updated_at | date(format="%+") }}">
-              {{ page.updated_at | date(format="%Y-%m-%d") }}
-            </time>
-            &nbsp;(original:
-            <time datetime="{{ page.date | date(format="%+") }}">
-              {{ page.date | date(format="%Y-%m-%d") }}
-            </time>)
-          {% else %}
-            <time datetime="{{ page.date | date(format="%+") }}">
-              {{ page.date | date(format="%Y-%m-%d") }}
-            </time>
-          {% endif %}{% if config.extra.author_name %} — {{ config.extra.author_name }}{% endif %}
-        </p>
+        <time class="post-date" datetime="{{ page.date | date(format='%Y-%m-%d') }}">
+          {{ page.date | date(format="%d %b %Y") }}
+        </time>
       {% endif %}
-    </header>
-
-    {{ page.content | safe }}
+    </section>
+    <section>
+      <div class="post-content">
+        {{ page.content | safe }}
+      </div>
+    </section>
 
     {% set linkedin = config.extra.linkedin | default(value="") %}
     {% set instagram = config.extra.instagram | default(value="") %}

@@ -1,49 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <article class="post-article">
-    <div class="post-top">
-      <header>
-        <h1>{{ page.title }}</h1>
-        {% if page.date %}
-          <span class="meta">
-            {% if page.updated_at %}
-              <time datetime="{{ page.updated_at | date(format="%+") }}">
-                {{ page.updated_at | date(format="%d %b %Y") }}
-              </time>
-              &nbsp;(original:
-              <time datetime="{{ page.date | date(format="%+") }}">
-                {{ page.date | date(format="%Y-%m-%d") }}
-              </time>)
-            {% else %}
-              <time datetime="{{ page.date | date(format="%+") }}">
-                {{ page.date | date(format="%d %b %Y") }}
-              </time>
-            {% endif %}
-          </span>
-        {% endif %}
-      </header>
-
-      {{ page.content | safe }}
-
-      <div class="share-links">
-        Share on &nbsp;
-        <a href="https://twitter.com/intent/tweet?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">X</a>or&nbsp;
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <article>
+    <section>
+      {% if page.date %}
+        <time class="post-date" datetime="{{ page.date | date(format='%Y-%m-%d') }}">
+          {{ page.date | date(format="%d %b %Y") }}
+        </time>
+      {% endif %}
+      <h1>{{ page.title }}</h1>
+    </section>
+    <section>
+      <div class="post-content">
+        {{ page.content | safe }}
       </div>
+    </section>
+
+    <div class="post-share">
+      Share on &nbsp;
+      <a href="https://twitter.com/intent/tweet?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">X</a>
+      &nbsp;or&nbsp;
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.permalink | safe }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
 
-    <div class="post-bottom">
-      <hr />
-
-      <nav class="post-nav">
-        {% if page.lower %}
-          <a href="{{ page.lower.permalink | safe }}">← {{ page.lower.title }}</a>
-        {% endif %}
-        {% if page.higher %}
-          <a href="{{ page.higher.permalink | safe }}">{{ page.higher.title }} →</a>
-        {% endif %}
-      </nav>
-    </div>
+    <nav class="post-next">
+      {% if page.lower %}
+        <a href="{{ page.lower.permalink | safe }}">← {{ page.lower.title }}</a>
+      {% endif %}
+      {% if page.higher %}
+        &nbsp;&nbsp;
+        <a href="{{ page.higher.permalink | safe }}">{{ page.higher.title }} →</a>
+      {% endif %}
+    </nav>
   </article>
 {% endblock content %}

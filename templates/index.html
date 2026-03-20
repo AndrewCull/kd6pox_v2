@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block content %}
+<article>
 {% if config.description %}
 <p>{{ config.description }}</p>
 {% endif %} {% set writing = get_section(path="writing/_index.md") %} {% set
@@ -26,4 +27,6 @@ lists = get_section(path="lists/_index.md") %}
         {% endfor %}
     </ul>
 </section>
-{% endif %} {% endblock content %}
+{% endif %}
+</article>
+{% endblock content %}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<article>
 <section class="archive">
     {% if section is defined and section.title %}
     <h1>{{ section.title }}</h1>
@@ -55,4 +56,5 @@
     </nav>
     {% endif %}
 </section>
+</article>
 {% endblock content %}
