@@ -1,5 +1,5 @@
 +++
 title = "Home"
-description = "Landing page introducing Andrew Cull, his latest writing, and current areas of focus."
+description = "Andrew Cull | Personal Blog"
 template = "index.html"
 +++

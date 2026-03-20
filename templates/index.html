@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <article>
 {% if config.description %}
-<p>{{ config.description }}</p>
+<p class="home-intro">{{ config.description }}</p>
 {% endif %} {% set writing = get_section(path="writing/_index.md") %} {% set
 lists = get_section(path="lists/_index.md") %}
 

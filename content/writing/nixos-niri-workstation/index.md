@@ -16,13 +16,13 @@ This post walks through what I chose, why, and how to reproduce it. The entire c
 
 ## The Hardware
 
-**ThinkPad P14s Gen 6 AMD** — Ryzen AI 7 PRO 350, 96GB DDR5-5600, 1TB NVMe. This is the machine that made NixOS practical for me. Previous attempts on an 8GB Dell XPS 13 were educational but painful — cargo builds would swap, Docker was off-limits, and Chromium with a single Claude tab would stutter the touchpad.
+**ThinkPad P14s Gen 6 AMD** — Ryzen AI 7 PRO 350, 96GB DDR5-5600, 1TB NVMe. This is the machine that made NixOS practical for me.{% sidenote(id="xps13") %}The 8GB Dell XPS 13 was a great machine for travel but brutal for development — cargo builds would swap, Docker was off-limits, and Chromium with a single Claude tab would stutter the touchpad.{% end %}
 
 96GB changes the equation entirely. Docker, cargo builds, Next.js dev servers, multiple Chrome PWAs, and Claude Code all running simultaneously without the system breaking a sweat.
 
 **BenQ RD280UG** — 28" 3:2 programming monitor at work, with the same display at home. The coding-specific display modes and Nano Matte panel make a real difference over long sessions. The 3:2 aspect ratio gives you more vertical space for code without going ultrawide.
 
-**HHKB Professional HYBRID Type-S** — blank keycaps. The keyboard that forces you to learn your own muscle memory. Combined with a tiling compositor where everything is keyboard-driven, the blanks actually make sense. You stop looking down. Combined with niri, I have all types of secret key combinations to add some media keys, launch anything I need to, and thoroughly confuse everyone in my office. If a password or key has a special character I'm about 85% dead on, don't ask me about page up or page down yet. Typing speed is much faster with this setup.
+**HHKB Professional HYBRID Type-S** — blank keycaps. The keyboard that forces you to learn your own muscle memory. Combined with a tiling compositor where everything is keyboard-driven, the blanks actually make sense. You stop looking down.{% sidenote(id="hhkb") %}Combined with niri, I have all types of secret key combinations to add some media keys, launch anything I need to, and thoroughly confuse everyone in my office. If a password or key has a special character I'm about 85% dead on, don't ask me about page up or page down yet.{% end %} Typing speed is much faster with this setup.
 
 {{ img(src="fastfetch-thinkpad-p14s-nixos-specs.png", alt="System specs via fastfetch") }}
 
@@ -38,7 +38,7 @@ sudo nixos-rebuild switch --flake ~/nixos-config#p14s
 
 Twenty minutes later, I have an identical system. Every font, every keybind, every shell alias. The same system I was running five minutes before the old machine died.
 
-The other superpower is rollback. Every `nixos-rebuild` creates a new generation. If an update breaks something, I pick the previous generation from the boot menu and I'm back to a working system in thirty seconds. No recovery mode, no reinstall, no stress.
+The other superpower is rollback. Every `nixos-rebuild` creates a new generation. If an update breaks something, I pick the previous generation from the boot menu and I'm back to a working system in thirty seconds.{% sidenote(id="rollback") %}This has saved me twice already — once when a kernel update broke my fingerprint reader, and once when a waybar config change crashed niri on login.{% end %} No recovery mode, no reinstall, no stress.
 
 ## Why Niri
 
@@ -121,7 +121,7 @@ nixos-config/
 
 Adding a new tool means creating one `.nix` file in `home/`. The auto-import picks it up on the next rebuild. No import list to maintain.
 
-The niri config uses a raw `config.kdl` file instead of the niri-flake's Nix settings API. This avoids a class of build-time errors where the flake's action names don't match the installed niri version. The KDL file is battle-tested upstream and just works.
+The niri config uses a raw `config.kdl` file instead of the niri-flake's Nix settings API.{% marginnote(id="kdl") %}The niri-flake Nix API is well-maintained but can lag behind niri releases. A raw KDL config file sidesteps version mismatch issues entirely.{% end %} This avoids a class of build-time errors where the flake's action names don't match the installed niri version. The KDL file is battle-tested upstream and just works.
 
 ## Reproducing This Setup
 
